@@ -6,4 +6,5 @@ import (
 )
 func main(){
 	fmt.Println(add.Name, add.Age)
+	fmt.Printf("%d", 10)
 }

@@ -1,5 +1,5 @@
 package add
-var Name string = "hello"
-var Age int = 10
+var Name  = "hello"
+var Age  = 10
 
 
