@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 )
 
 
@@ -12,5 +13,6 @@ func main() {
 
 	fmt.Println(goRoot)
 	fmt.Println(path)
+	fmt.Print(strings.Split(path, ":")[2])
 }
 

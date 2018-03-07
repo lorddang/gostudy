@@ -6,7 +6,7 @@ import (
 )
 
 func main()  {
-	printN (5)
+	printN (100)
 	time.Sleep(time.Second)
 
 }
