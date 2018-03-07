@@ -11,11 +11,14 @@ func main()  {
 	var floatChannel = make(chan float32, 10)
 	for i := 0;i< 10; i++  {
 		go genRandomInt(intChannel)
+		x := <- intChannel
+		fmt.Println(x)
 	}
-	fmt.Println("===============")
+	fmt.Println("==============================")
 	for i := 0; i < 10; i ++ {
 		go genRandomFloat(floatChannel)
-
+		f := <- floatChannel
+		fmt.Println(f)
 	}
 
 	time.Sleep(time.Second * 1)
