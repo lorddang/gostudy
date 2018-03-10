@@ -3,12 +3,15 @@
 */
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 func main() {
 	for i := 101; i <= 200; i++ {
 		isSuShu := true
-		for j := 2; j < i; j++ {
+		for j := 2; j < int(math.Sqrt(float64(i))); j++ {
 			if i%j == 0 {
 				isSuShu = false
 				break
@@ -19,5 +22,4 @@ func main() {
 			fmt.Println(i)
 		}
 	}
-
 }
