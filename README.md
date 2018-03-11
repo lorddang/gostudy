@@ -28,7 +28,7 @@ fmt.Println("Hello World")
 
 ### strings.Index(s string, str string) int
 
-作用:判断str 在s中首次出现的位置乳沟没有出现则返回-1
+作用:判断str 在s中首次出现的位置如果没有出现则返回-1
 4. strings.LastIndex(s string, str string) int：判断str在s中最后出现的位置，如果没有出现，则返回-1
 
 练习3：写一个函数返回一个字符串在另一个字符串的首次出现和最后出现位置
