@@ -15,7 +15,11 @@ func main()  {
 	}
 }
 
-func isMirrorStr(str string) bool  {
+func isMirrorStr(s string) bool  {
+
+	// 修复中文字符串判读是否为回文失败的情况
+
+	str := []rune(s)
 	l := len(str)
 	for i:=0;i<l/2;i++ {
 		if str[i] != str[l - i -1] {

@@ -16,7 +16,8 @@ func main()  {
 	fmt.Printf("其他字符的个数为：%d \n", numOfOthers)
 }
 
-func countByCategory(str string) (int, int, int, int)  {
+func countByCategory(s string) (int, int, int, int)  {
+	str := []rune(s)
 	var (
 		numOfSpace int
 		numOfEnglishChar int
