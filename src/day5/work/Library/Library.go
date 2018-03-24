@@ -27,18 +27,18 @@ func (this *Library)AddStudent(student Student)  {
 }
 
 func (this *Library)ShowBooks()  {
-	fmt.Println("[编号] \t\t isbn \t\t name \t\t author \t\t publishDate \t\t num  \n")
+	fmt.Println("[编号] \t isbn \t name \t author \t publishDate \t num")
 	for k, v  := range this.BookList{
-		fmt.Printf("[%d] \t\t %s \t\t %s \t\t %s \t\t %s \t\t %d \n", k, v.Isbn, v.Name, v.Author, v.PublishDate, v.Num)
+		fmt.Printf("[%d] \t %s \t %s \t %s \t %s \t %d \n", k, v.Isbn, v.Name, v.Author, v.PublishDate, v.Num)
 	}
 
 }
 
 func (this *Library) ShowStudent()  {
 
-	fmt.Println("[编号] \t\t 学号 \t\t 姓名 \t\t 身份证号 \t\t 年级 \t\t 性别\n\t" )
+	fmt.Println("[编号] \t 学号 \t 姓名 \t 身份证号 \t 年级 \t 性别" )
 	for k, v  := range this.StudentList{
-		fmt.Printf("[%d] \t\t %s \t\t %s \t\t %s \t\t %s \t\t %s\n", k, v.Sid, v.Name, v.IdCard, v.Grade, v.Sex)
+		fmt.Printf("[%d] \t %s \t %s \t %s \t %s \t %s\n", k, v.Sid, v.Name, v.IdCard, v.Grade, v.Sex)
 	}
 }
 
@@ -47,27 +47,52 @@ func (this *Library)BorrowBook()  {
 		bindex int
 		sindex int
 	)
+	this.ShowBooks()
 	fmt.Print("请输入图书编号: ")
 	fmt.Scanf("%d\n", &bindex)
 	if bindex >= len(this.BookList){
 		fmt.Println("图书不存在")
 		return
 	}
+	this.ShowStudent()
 	fmt.Print("请输入学生编号: ")
 	fmt.Scanf("%d\n", &sindex)
 	if sindex >= len(this.StudentList) {
 		fmt.Println("学生不存在")
 		return
 	}
-	s := this.StudentList[sindex]
-	b := this.BookList[bindex]
+	s := &this.StudentList[sindex]
+	b := &this.BookList[bindex]
 	if b.BorrowBook(s){
+		fmt.Println("借书成功")
 		s.BorrowBook(b)
+		fmt.Println(s.BookList)
 	}
 	
 }
 
-func (this *Library)RebackBook(s Student, b Book)  {
+func (this *Library)RebackBook()  {
+	var (
+		bindex int
+		sindex int
+	)
+	this.ShowStudent()
+	fmt.Print("请输入学生编号: ")
+	fmt.Scanf("%d\n", &sindex)
+	if sindex >= len(this.StudentList) {
+		fmt.Println("学生不存在")
+		return
+	}
+	s := &this.StudentList[sindex]
+	this.ShowBooks()
+	fmt.Print("请输入图书编号: ")
+	fmt.Scanf("%d\n", &bindex)
+
+	if bindex >= len(this.BookList){
+		fmt.Println("图书不存在")
+		return
+	}
+	b := &this.BookList[bindex]
 	if b.RebackBook(s){
 		s.RebackBook(b)
 	}
@@ -138,11 +163,10 @@ func ParseStudentInfo() (stu Student) {
 
 func (this Library)echoCmdInfo()  {
 	info := `
-[0] 		addbook     		添加图书
+[0] 		addbook				添加图书
 [1] 		addstudent 			添加学生
 [2] 		showbook 			展示图书信息
 [3] 		showstudent			展示学生信息
-
 `
 fmt.Println(info)
 
@@ -154,15 +178,19 @@ func (this Library)CmdOption()  {
 		var option string
 		fmt.Scanf("%s\n", &option)
 		switch option {
-		case "addbook":
+		case "addbook", "0":
 			this.AddBook(ParseBookInfo())
-		case "addstudent":
+		case "addstudent", "1":
 			this.AddStudent(ParseStudentInfo())
-		case "showbook":
+		case "showbook", "2":
 			this.ShowBooks()
-		case "showstudent":
+		case "showstudent", "3":
 			this.ShowStudent()
-		case "quit":
+		case "borrow", "4":
+			this.BorrowBook()
+		case "reback", "5":
+			this.RebackBook()
+		case "quit", "exit", "9":
 			return
 		}
 	}
