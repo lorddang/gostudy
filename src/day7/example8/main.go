@@ -66,7 +66,7 @@ func testSlice() {
 }
 func main() {
 
-	//testStruct()
-	//testMap()
+	testStruct()
+	testMap()
 	testSlice()
 }
