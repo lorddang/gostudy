@@ -1,4 +1,5 @@
 package main
+
 import (
 	"bufio"
 	"fmt"
@@ -9,16 +10,14 @@ import (
 
 func main() {
 
-	conn, err := net.Dial("tcp", "localhost:7000")
+	conn, err := net.Dial("tcp", "localhost:50000")
 	if err != nil {
 		fmt.Println("Error dialing", err.Error())
 		return
 	}
 
-
 	defer conn.Close()
 	inputReader := bufio.NewReader(os.Stdin)
-
 	for {
 		input, _ := inputReader.ReadString('\n')
 		trimmedInput := strings.Trim(input, "\r\n")
@@ -29,13 +28,5 @@ func main() {
 		if err != nil {
 			return
 		}
-
-		buf := make([]byte, 512)
-		n, err := conn.Read(buf)
-		if err != nil {
-			return
-		}
-		fmt.Printf("server > %s \n\n", string(buf[:n]))
-
 	}
 }

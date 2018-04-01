@@ -34,7 +34,7 @@ func processAccept(conn net.Conn)  {
 			log.Fatalf("read error %v", err)
 			break
 		}
-		fmt.Printf("> %s", string(buf[:n]))
+		fmt.Printf("> %s \n", string(buf[:n]))
 	}
 
 
